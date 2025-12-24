@@ -28,7 +28,8 @@
             max-height: 800px;
             background: white;
             border-radius: 1rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px
+             60px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -390,7 +391,8 @@
             showTypingIndicator();
 
             try {
-                const response = await fetch('http://localhost:3001/api/chat', {
+                // Use relative URL so it works on any port (matches server PORT in .env)
+                const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -426,7 +428,8 @@
             if (!confirm('Are you sure you want to clear the chat?')) return;
 
             try {
-                await fetch('http://localhost:3001/api/clear', {
+                // Use relative URL so it works on any port (matches server PORT in .env)
+                await fetch('/api/clear', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -451,8 +454,8 @@
             }
         }
 
-        // Check server health on load
-        fetch('http://localhost:3001/api/health')
+        // Check server health on load (relative URL so it works on any port)
+        fetch('/api/health')
             .then(res => res.json())
             .then(data => {
                 if (data.mode === 'demo') {
@@ -466,7 +469,7 @@
                 }
             })
             .catch(err => {
-                showError('⚠️ Cannot connect to server. Make sure the server is running on port 3001');
+                showError('⚠️ Cannot connect to server. Make sure the server is running.');
             });
     </script>
 </body>
